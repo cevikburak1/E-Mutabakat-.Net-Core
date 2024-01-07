@@ -10,7 +10,12 @@ namespace Business.Abstract
 {
     public interface ICompanyService
     {
+        //IResult işlem yapar sonuç dönderir
         IResult Add(Company company);
-       IDataResult<List<Company>> GetList();
+        IResult CompanyExist(Company company);
+        IResult UserCompanyAdd(int userId,int companyId);
+        IDataResult<List<Company>> GetList();
+
+
     }
 }

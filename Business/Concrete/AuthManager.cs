@@ -5,6 +5,7 @@ using Core.Utilities.Hashing;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using Core.Utilities.Security.JWT;
+using Entities.Concrete;
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,22 @@ namespace Business.Concrete
     {
         private readonly IUserService _userService;
         private readonly ITokenHelper _tokenHelper;
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
+        private readonly ICompanyService _companyService;
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _companyService = companyService;
+        }
+
+        public IResult CompanytExist(Company company)
+        {
+            var result = _companyService.CompanyExist(company);
+            if (result.Success == false)
+            {
+                return new ErrorResult(Messages.CompanyAlreadyExist);
+            }
+            return new SuccessResult();
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user,int companId)
@@ -45,7 +58,7 @@ namespace Business.Concrete
             return new  SuccessDataResult<User>(usertoCheck, Messages.SuccessfulLogin);
         }
 
-        public IDataResult<User> Register(UserForRegister userForRegister, string password)
+        public IDataResult<UserCompanyDto> Register(UserForRegister userForRegister, string password,Company company)
         {
             byte[] passwordHash, passweordSalt;
             HashingHelper.CreatePasswordHash(password,out passwordHash, out passweordSalt);
@@ -57,6 +70,43 @@ namespace Business.Concrete
                 MailConfirm = false,
                 MailConfirmDate = DateTime.Now,
                 MailConfirmValue= Guid.NewGuid().ToString(),
+                PasswordHash = passwordHash,
+                PasswordSalt = passweordSalt,
+                Name = userForRegister.Name,
+            };
+            _userService.Add(user);
+            _companyService.Add(company);
+            //bu benim ilişkimi tanımlıyor 
+            _companyService.UserCompanyAdd(user.Id, company.Id);
+            UserCompanyDto userCompanyDto = new UserCompanyDto()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                AddedAt= user.AddedAt,
+                IsActive = user.IsActive,
+                CompanyId = company.Id,
+                MailConfirm= user.MailConfirm,
+                MailConfirmDate= user.MailConfirmDate,
+                MailConfirmValue = user.MailConfirmValue,
+                PasswordHash=user.PasswordHash,
+                PasswordSalt=user.PasswordSalt,
+            };
+            return new SuccessDataResult<UserCompanyDto>(userCompanyDto, Messages.UserRegsiter);
+        }
+
+        public IDataResult<User> RegisterSecondAccount(UserForRegister userForRegister, string password)
+        {
+            byte[] passwordHash, passweordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passweordSalt);
+            var user = new User()
+            {
+                Email = userForRegister.Email,
+                AddedAt = DateTime.Now,
+                IsActive = true,
+                MailConfirm = false,
+                MailConfirmDate = DateTime.Now,
+                MailConfirmValue = Guid.NewGuid().ToString(),
                 PasswordHash = passwordHash,
                 PasswordSalt = passweordSalt,
                 Name = userForRegister.Name,

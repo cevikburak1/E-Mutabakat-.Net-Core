@@ -13,7 +13,8 @@ namespace Business.Constans
         public static string PasswordError = "Şifre Yanlış :(";
         public static string SuccessfulLogin = "Şifre Dogru Tebrikler :)";
         public static string UserRegsiter = "Kullanıcı Kaydı Başarılı :)";
-        public static string UserAlready = "Zaten Böle Bir Kullanıcı var :(";
+        public static string UserAlready = "Zaten Böyle Bir Kullanıcı var :(";
+        public static string CompanyAlreadyExist = "Zaten Böyle Bir Şirket var :(";
     }
     
 }

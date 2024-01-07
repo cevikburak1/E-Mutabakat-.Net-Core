@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,16 +18,25 @@ namespace Web.API.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(UserForRegister userForRegister)
+        //API 2 Nesne Kabul etmedigi için  UserForRegister ve  Company i tek nesneye dönüştürüp kullandım
+        public IActionResult Register(UserAndCompanyRegisterDto userAndCompanyRegisterDto)
         {
-            var userexist = _authService.UserExist(userForRegister.Email);
+
+            //kullanıcı bilgileri aldık şirket bilgilerini aldık  ikisinidekontrol ettirdim sistemde kayıtlı mı diye kayıtlı degilse gidip 1 kullanıcı 1 şirket kaydı oluşturdum
+            var userexist = _authService.UserExist(userAndCompanyRegisterDto.UserForRegister.Email);
             if (!userexist.Success)
             {
                 return BadRequest(userexist.Message);
             }
+            var companyExist = _authService.CompanytExist(userAndCompanyRegisterDto.company);
+            if (!companyExist.Success)
+            {
+                return BadRequest(userexist.Message);
+            }
+
             //şifreyi ayrı gönderme sebebim şifreyi kriptoluyor olmamdan kaynaklı 
-            var regsiterResult = _authService.Register(userForRegister, userForRegister.Password);
-            var result = _authService.CreateAccessToken(regsiterResult.Data,0);
+            var regsiterResult = _authService.Register(userAndCompanyRegisterDto.UserForRegister, userAndCompanyRegisterDto.UserForRegister.Password, userAndCompanyRegisterDto.company);
+            var result = _authService.CreateAccessToken(regsiterResult.Data, regsiterResult.Data.CompanyId);
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -34,6 +44,27 @@ namespace Web.API.Controllers
             return BadRequest(regsiterResult.Message);
 
         }
+
+
+        [HttpPost("registerSecondAccount")]
+        public IActionResult RegisterSecondAccount(UserForRegister userForRegister, int companyId)
+        {
+            var userexist = _authService.UserExist(userForRegister.Email);
+            if (!userexist.Success)
+            {
+                return BadRequest(userexist.Message);
+            }
+            //şifreyi ayrı gönderme sebebim şifreyi kriptoluyor olmamdan kaynaklı 
+            var regsiterResult = _authService.RegisterSecondAccount(userForRegister, userForRegister.Password);
+            var result = _authService.CreateAccessToken(regsiterResult.Data, 0);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(regsiterResult.Message);
+
+        }
+
         [HttpPost("login")]
         public IActionResult Login(UserForLogin userForLogin)
         {
