@@ -15,6 +15,8 @@ namespace Business.Constans
         public static string UserRegsiter = "Kullanıcı Kaydı Başarılı :)";
         public static string UserAlready = "Zaten Böyle Bir Kullanıcı var :(";
         public static string CompanyAlreadyExist = "Zaten Böyle Bir Şirket var :(";
+        public static string MailParameterAdded = "Tebrikler :) Mail Paramtreleri Başar ile Güncellendi :)";
     }
     
+
 }
