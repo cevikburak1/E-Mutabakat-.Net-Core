@@ -1,27 +1,30 @@
 
-E-Mutabakat Sitesi Projesi
-Projem Hakkında
-Finansal mutabakat süreçlerini dijitalleştiren bu projede, ASP.NET 6.0 Web API ve Angular 13 kullanarak kullanıcı dostu bir E-Mutabakat platformu geliştirdim. Platform, şirketlerin finansal uzlaşma süreçlerini basitleştiren ve otomatize eden fonksiyonelliklere sahip.
+# E-Mutabakat Sitesi Projesi
 
-Teknolojiler ve Araçlar
-ASP.NET 6.0 Web API: RESTful API tasarımı, veri yönetimi ve backend servislerin implementasyonu.
-Angular 13: Kullanıcıların etkileşimli deneyimler yaşamasını sağlayan dinamik frontend tasarımı.
-Entity Framework Core: Objelerin veritabanı ile ilişkilendirilmesi ve ORM olarak kullanımı.
-Swagger/OpenAPI: API dokümantasyonu ve test süreçlerinin standardizasyonu.
-JWT (JSON Web Tokens): Güvenli kimlik doğrulama ve yetkilendirme işlemleri.
-AutoMapper: Nesne tabanlı eşleme işlemleri için kullanımı.
-Serilog: Detaylı loglama işlemleri ve hata takibi.
-Angular Material: Kullanıcı arayüzünün modern ve responsive olmasını sağlayan bileşenler.
-Ek olarak, platformda kullanılan diğer önemli teknolojiler ve araçlar:
+## Proje Hakkında
+Bu repo, finansal mutabakat süreçlerini dijitalleştiren ve otomatize eden bir E-Mutabakat platformunun kaynak kodlarını içerir. ASP.NET 6.0 Web API ve Angular 13 kullanılarak geliştirilmiş bu sistem, finansal işlemleri basitleştiren ve süreçleri hızlandıran kullanıcı dostu bir arayüz sunar.
 
-Email Gönderimi: Platform içi bildirimler ve dış iletişim için entegre edilmiş e-posta servisi.
-Fluent Validation: Giriş verilerinin doğrulanması ve iş kurallarının uygulanması için kullanılan bir kütüphane.
-AOP Caching: Performans iyileştirmesi amacıyla kullanılan Aspect-Oriented Programming yaklaşımı.
-AutoFac: Uygulamanın bağımlılık enjeksiyonu ve tersine kontrol süreçlerinin yönetimi.
-Geliştirme Sürecim
-Tasarım: Kullanıcı ve iş gereksinimlerine uygun sistem mimarisi ve kullanıcı arayüzü tasarımı.
-Kodlama: Temiz, modüler ve sürdürülebilir kod yapısı.
-Test: Birim testleri ve kullanıcı kabul testleriyle uygulamanın stabilitesinin sağlanması.
-Optimizasyon: Sistem performansı ve güvenlik açısından sürekli iyileştirmeler.
-Sonuç
-Projeyi başarıyla tamamladım ve çok yönlü bir finansal platform oluşturarak, kullanıcıların iş süreçlerini kolaylaştıran ve verimliliği artıran bir çözüm sundum. E-Mutabakat Sitesi, finans sektöründe önemli bir dijital dönüşüm aracı olarak konumlandı.
+## Teknolojiler ve Araçlar
+- **ASP.NET 6.0 Web API:** RESTful API tasarımı, veri yönetimi ve backend servislerin oluşturulması.
+- **Angular 13:** Kullanıcı etkileşimini en üst düzeye çıkaran dinamik frontend geliştirme.
+- **Entity Framework Core:** Veritabanı işlemleri için güçlü bir ORM aracı.
+- **Swagger/OpenAPI:** API dokümantasyonu ve test süreçlerini kolaylaştıran araçlar.
+- **JWT (JSON Web Tokens):** Güvenli kullanıcı kimlik doğrulama ve yetkilendirme mekanizmaları.
+- **AutoMapper:** Nesne eşleştirme işlemleri için etkin bir araç.
+- **Serilog:** Gelişmiş loglama yetenekleri ile sistem hatalarının takibi.
+- **Angular Material:** Kullanıcı arayüzünü zenginleştiren estetik ve responsive UI bileşenleri.
+
+## Ekstra Özellikler ve Geliştirmeler
+- **Email Gönderimi:** Kullanıcılar ve sistem arasındaki iletişimi güçlendiren email gönderim özellikleri.
+- **Fluent Validation:** Kullanıcı girdilerinin doğrulama ve iş kurallarının uygulanması.
+- **AOP Caching:** Uygulamanın performansını artırmak için kullanılan caching mekanizmaları.
+- **AutoFac:** Uygulamanın modüler ve test edilebilir olmasını sağlayan bağımlılık enjeksiyon kütüphanesi.
+
+## Geliştirme Yaklaşımım
+- **Modüler ve Sürdürülebilir Kod Yapısı:** Her bir modül, bağımsız ve sürdürülebilir şekilde tasarlandı.
+- **Yüksek Performans ve Güvenlik:** Uygulamanın performansını ve güvenliğini sürekli olarak göz önünde bulundurarak geliştirmeler yapıldı.
+- **Kullanıcı Odaklı Test Yaklaşımı:** Kullanıcı deneyimini en üst düzeye çıkarmayı hedefleyen test süreçleri.
+- **Sürekli Entegrasyon ve Dağıtım:** Yeni özelliklerin ve düzeltmelerin hızlı ve sorunsuz bir şekilde yayınlanması.
+
+
+
