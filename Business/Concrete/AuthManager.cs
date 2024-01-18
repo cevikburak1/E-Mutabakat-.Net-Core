@@ -140,7 +140,7 @@ namespace Business.Concrete
             _userService.Update(user);
         }
 
-        public IDataResult<User> RegisterSecondAccount(UserForRegister userForRegister, string password)
+        public IDataResult<User> RegisterSecondAccount(UserForRegister userForRegister, string password,int companyId)
         {
             byte[] passwordHash, passweordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passweordSalt);
@@ -157,6 +157,8 @@ namespace Business.Concrete
                 Name = userForRegister.Name,
             };
             _userService.Add(user);
+            _companyService.UserCompanyAdd(user.Id, companyId);
+            SendConfirmEmail(user);
             return new SuccessDataResult<User>(user, Messages.UserRegsiter);
         }
 
@@ -197,6 +199,11 @@ namespace Business.Concrete
             }
             SendConfirmEmail(user);
             return new SuccessResult(Messages.MailConfirmSendSuccessful);
+        }
+
+        public IDataResult<UserCompany> GetCompany(int userid)
+        {
+            return new SuccessDataResult<UserCompany>(_companyService.GetCompany(userid).Data);
         }
     }
 }

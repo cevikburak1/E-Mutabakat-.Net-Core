@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Concrete;
 using Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
@@ -47,16 +48,16 @@ namespace Web.API.Controllers
 
 
         [HttpPost("registerSecondAccount")]
-        public IActionResult RegisterSecondAccount(UserForRegister userForRegister, int companyId)
+        public IActionResult RegisterSecondAccount(UserForRegisterSecondAccountDto userForRegisterSecondAccountDto)
         {
-            var userexist = _authService.UserExist(userForRegister.Email);
+            var userexist = _authService.UserExist(userForRegisterSecondAccountDto.Email);
             if (!userexist.Success)
             {
                 return BadRequest(userexist.Message);
             }
             //şifreyi ayrı gönderme sebebim şifreyi kriptoluyor olmamdan kaynaklı 
-            var regsiterResult = _authService.RegisterSecondAccount(userForRegister, userForRegister.Password);
-            var result = _authService.CreateAccessToken(regsiterResult.Data, 0);
+            var regsiterResult = _authService.RegisterSecondAccount(userForRegisterSecondAccountDto, userForRegisterSecondAccountDto.Password, userForRegisterSecondAccountDto.CompanyId);
+            var result = _authService.CreateAccessToken(regsiterResult.Data, userForRegisterSecondAccountDto.CompanyId);
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -73,12 +74,21 @@ namespace Web.API.Controllers
             {
                 return BadRequest(logindata.Message);
             }
-            var result = _authService.CreateAccessToken(logindata.Data,0);
-            if (result.Success)
+            if (logindata.Data.IsActive)
             {
-                return Ok(result.Data);
+                var usercompany = _authService.GetCompany(logindata.Data.Id).Data;
+                var result = _authService.CreateAccessToken(logindata.Data, usercompany.CompanyId);
+                if (result.Success)
+                {
+                    return Ok(result.Data);
+                }
+                return BadRequest(result.Message);     
             }
-            return BadRequest(result.Message);
+            return BadRequest("Kullanıcı Pasif Durumda.Aktif Etmek için Yöneticiye Danışın");
+
+
+
+
         }
 
 
