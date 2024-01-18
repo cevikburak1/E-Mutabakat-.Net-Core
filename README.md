@@ -1,24 +1,27 @@
 
-# E-Mutabakat Sitesi Projesi
+E-Mutabakat Sitesi Projesi
+Projem Hakkında
+Finansal mutabakat süreçlerini dijitalleştiren bu projede, ASP.NET 6.0 Web API ve Angular 13 kullanarak kullanıcı dostu bir E-Mutabakat platformu geliştirdim. Platform, şirketlerin finansal uzlaşma süreçlerini basitleştiren ve otomatize eden fonksiyonelliklere sahip.
 
-## Projem Hakkında
-Bu projede, ASP.NET 6.0 Web API ve Angular 13 kullanarak bir E-Mutabakat Sitesi geliştirdim. Bu platform, finansal mutabakat süreçlerini dijitalleştiren ve bu işlemleri kolaylaştıran bir çözüm sunuyor.
+Teknolojiler ve Araçlar
+ASP.NET 6.0 Web API: RESTful API tasarımı, veri yönetimi ve backend servislerin implementasyonu.
+Angular 13: Kullanıcıların etkileşimli deneyimler yaşamasını sağlayan dinamik frontend tasarımı.
+Entity Framework Core: Objelerin veritabanı ile ilişkilendirilmesi ve ORM olarak kullanımı.
+Swagger/OpenAPI: API dokümantasyonu ve test süreçlerinin standardizasyonu.
+JWT (JSON Web Tokens): Güvenli kimlik doğrulama ve yetkilendirme işlemleri.
+AutoMapper: Nesne tabanlı eşleme işlemleri için kullanımı.
+Serilog: Detaylı loglama işlemleri ve hata takibi.
+Angular Material: Kullanıcı arayüzünün modern ve responsive olmasını sağlayan bileşenler.
+Ek olarak, platformda kullanılan diğer önemli teknolojiler ve araçlar:
 
-## Teknolojiler ve Araçlar
-- **ASP.NET 6.0 Web API:** RESTful API tasarımı ve veri yönetimi.
-- **Angular 13:** Dinamik ve etkileşimli kullanıcı arayüzü.
-- **Entity Framework Core:** Veritabanı işlemleri için.
-- **Swagger/OpenAPI:** API dokümantasyonu ve test için.
-- **JWT (JSON Web Tokens):** Kimlik doğrulama ve yetkilendirme.
-- **AutoMapper:** Nesne eşleme işlemleri için.
-- **Serilog:** Loglama işlemleri için.
-- **Angular Material:** Modern ve responsif kullanıcı arayüzü bileşenleri.
-
-## Geliştirme Sürecim
-1. **Tasarım:** İş gereksinimleri ve sistem mimarisi.
-2. **Kodlama:** Modüler ve sürdürülebilir kod yapısı.
-3. **Test:** Birim ve entegrasyon testleri.
-4. **Optimizasyon:** Performans ve güvenlik iyileştirmeleri.
-
-## Sonuç
-Projeyi başarıyla tamamladım ve bu süreçte gerek back-end gerekse front-end teknolojileri hakkında kapsamlı tecrübeler edindim. E-Mutabakat Sitesi, finansal işlemleri kolaylaştırarak kullanıcılara değer katan bir platform olarak hayata geçti.
+Email Gönderimi: Platform içi bildirimler ve dış iletişim için entegre edilmiş e-posta servisi.
+Fluent Validation: Giriş verilerinin doğrulanması ve iş kurallarının uygulanması için kullanılan bir kütüphane.
+AOP Caching: Performans iyileştirmesi amacıyla kullanılan Aspect-Oriented Programming yaklaşımı.
+AutoFac: Uygulamanın bağımlılık enjeksiyonu ve tersine kontrol süreçlerinin yönetimi.
+Geliştirme Sürecim
+Tasarım: Kullanıcı ve iş gereksinimlerine uygun sistem mimarisi ve kullanıcı arayüzü tasarımı.
+Kodlama: Temiz, modüler ve sürdürülebilir kod yapısı.
+Test: Birim testleri ve kullanıcı kabul testleriyle uygulamanın stabilitesinin sağlanması.
+Optimizasyon: Sistem performansı ve güvenlik açısından sürekli iyileştirmeler.
+Sonuç
+Projeyi başarıyla tamamladım ve çok yönlü bir finansal platform oluşturarak, kullanıcıların iş süreçlerini kolaylaştıran ve verimliliği artıran bir çözüm sundum. E-Mutabakat Sitesi, finans sektöründe önemli bir dijital dönüşüm aracı olarak konumlandı.
