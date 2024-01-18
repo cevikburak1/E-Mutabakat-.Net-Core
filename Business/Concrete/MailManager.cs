@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.Constans;
 using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
+using DataAccess.Abstract;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +14,18 @@ namespace Business.Concrete
 {
     public class MailManager : IMailService
     {
-        public IResult SendMail(string mail, string subject, string body)
+        //DATA ACCESS KATMANINDA  İŞLEMLERİ APIYORUM BUSSİNİES DA KONTROLLERİ  YAPIP  GÖNDERİMİNİ YAPIYORUM
+        private readonly IMailDal _mailDal;
+
+        public MailManager(IMailDal mailDal)
         {
-            using()
+            _mailDal = mailDal;
+        }
+
+        public IResult SendMail(SendMailDto sendMailDto)
+        {
+            _mailDal.SendMail(sendMailDto);
+            return new SuccessResult(Messages.MailSendeSuccessful);
         }
     }
 }
