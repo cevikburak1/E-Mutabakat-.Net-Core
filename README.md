@@ -1,24 +1,26 @@
+# E-Mutabakat Sitesi Projesi - Backend
 
-# E-Mutabakat Sitesi Projesi
-
-## Projem Hakkında
-Bu projede, ASP.NET 6.0 Web API ve Angular 13 kullanarak bir E-Mutabakat Sitesi geliştirdim. Bu platform, finansal mutabakat süreçlerini dijitalleştiren ve bu işlemleri kolaylaştıran bir çözüm sunuyor.
+## Proje Hakkında
+Bu repo, E-Mutabakat platformunun backend kodlarını içerir. Finansal mutabakat süreçlerini dijitalleştiren bu sistem, ASP.NET 6.0 Web API ve Angular 13 kullanılarak inşa edilmiştir. Front-end kodları da dahil olmak üzere projenin tamamı, GitHub repolarımda bulunabilir.
 
 ## Teknolojiler ve Araçlar
-- **ASP.NET 6.0 Web API:** RESTful API tasarımı ve veri yönetimi.
-- **Angular 13:** Dinamik ve etkileşimli kullanıcı arayüzü.
-- **Entity Framework Core:** Veritabanı işlemleri için.
-- **Swagger/OpenAPI:** API dokümantasyonu ve test için.
-- **JWT (JSON Web Tokens):** Kimlik doğrulama ve yetkilendirme.
-- **AutoMapper:** Nesne eşleme işlemleri için.
-- **Serilog:** Loglama işlemleri için.
-- **Angular Material:** Modern ve responsif kullanıcı arayüzü bileşenleri.
+- **ASP.NET 6.0 Web API:** RESTful API tasarımı, veri yönetimi ve backend servislerin oluşturulması için.
+- **Entity Framework Core:** Güçlü bir ORM aracı olarak veritabanı işlemleri.
+- **Swagger/OpenAPI:** Açık ve kolay anlaşılır API dokümantasyonu için.
+- **JWT (JSON Web Tokens):** Kullanıcı kimlik doğrulama ve yetkilendirme.
+- **AutoMapper:** Objeler arası eşleştirme işlemleri.
+- **Serilog:** Gelişmiş loglama yetenekleri.
+- **Angular Material:** Estetik ve responsive kullanıcı arayüzü bileşenleri.
 
-## Geliştirme Sürecim
-1. **Tasarım:** İş gereksinimleri ve sistem mimarisi.
-2. **Kodlama:** Modüler ve sürdürülebilir kod yapısı.
-3. **Test:** Birim ve entegrasyon testleri.
-4. **Optimizasyon:** Performans ve güvenlik iyileştirmeleri.
+## Ekstra Özellikler ve Geliştirmeler
+- **Email Gönderimi:** Otomatik email bildirimleri.
+- **Fluent Validation:** Giriş verilerinin doğrulanması.
+- **AOP Caching:** Uygulama performansını artırmak için caching.
+- **AutoFac:** Bağımlılık enjeksiyonu ve tersine kontrol süreçleri.
 
-## Sonuç
-Projeyi başarıyla tamamladım ve bu süreçte gerek back-end gerekse front-end teknolojileri hakkında kapsamlı tecrübeler edindim. E-Mutabakat Sitesi, finansal işlemleri kolaylaştırarak kullanıcılara değer katan bir platform olarak hayata geçti.
+## Geliştirme Yaklaşımım
+Projede, temiz ve sürdürülebilir bir kod yapısını hedef alarak, yüksek performans ve güvenliği sağlayan bir geliştirme metodolojisi izledim. Kullanıcı odaklı bir test yaklaşımıyla, sürekli entegrasyon ve dağıtım süreçlerini benimsedim.
+
+## Frontend Kodları
+Bu projenin frontend kodları, Angular ile geliştirilmiş ve ayrı bir repoda barındırılmaktadır. Frontend kodlarına ve ek bilgilere Repolarımdan ulaşabilirsiniz.
+
