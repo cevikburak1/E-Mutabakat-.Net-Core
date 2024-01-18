@@ -20,10 +20,10 @@ namespace Business.Constans
         public static string MailTemplateAdded = "Tebrikler :) Mail Şablonu Başarı ile yapıldı :)";
         public static string MailTemplateDelete = "Tebrikler :) Mail Şablonu Başarı ile Silindi :)";
         public static string MailTemplateUpdate = "Tebrikler :) Mail Şablonu Başarı ile Güncellendi :)";
-        
-            
-            
+        public static string UserMailConfirmSuccessful = "Tebrikler :) Mail Başarı ile Onaylandı :)";
+        public static string MailConfirmSendSuccessful = "Onay Maili tekrar gönderildi :)";
 
+        
     }
 
     

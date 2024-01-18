@@ -22,13 +22,15 @@ namespace Business.Concrete
         private readonly ICompanyService _companyService;
         private readonly IMailService _mailService;
         private readonly IMailParameterService _mailParameterService;
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService)
+        private readonly IMailTemplateService _mailTemplateService;
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
             _companyService = companyService;
             _mailService = mailService;
             _mailParameterService = mailParameterService;
+            _mailTemplateService = mailTemplateService;
         }
 
         public IResult CompanytExist(Company company)
@@ -46,6 +48,16 @@ namespace Business.Concrete
             var claim = _userService.GetClaims(user, companId);
             var accessToken = _tokenHelper.CreateToken(user, claim, companId);
             return new SuccessDataResult<AccessToken>(accessToken);
+        }
+
+        public IDataResult<User> GetById(int id)
+        {
+            return new SuccessDataResult<User>(_userService.GetById(id));
+        }
+
+        public IDataResult<User> GetByMailConfirmValue(string value)
+        {
+            return new SuccessDataResult<User>(_userService.GetByMailConfirmValue(value));
         }
 
         public IDataResult<User> Login(UserForLogin userForLogin)
@@ -96,18 +108,34 @@ namespace Business.Concrete
                 PasswordHash=user.PasswordHash,
                 PasswordSalt=user.PasswordSalt,
             };
+            SendConfirmEmail(user);
+
+            return new SuccessDataResult<UserCompanyDto>(userCompanyDto, Messages.UserRegsiter);
+        }
+
+        void SendConfirmEmail(User user)
+        {
+            string subject = "Kullanıcı Kayıt Onay Maili";
+            string body = "Kullanıcı sisteme Kayıt oldu. Kaydı Tamamlamak için aşşagıdaki linke tıklaynız :)";
+            string link = "https://localhost:7030/api/Auth/confirmuser?value=" + user.MailConfirmValue;
+            string linkDescripiton = "Kaydı Onaylamak İçin Tıklayın";
+
+            var mailtemplate = _mailTemplateService.GetByTemplateName("Kayıt", 3);
+            string templatebody = mailtemplate.Data.Value;
+            templatebody = templatebody.Replace("{{title}}", subject);
+            templatebody = templatebody.Replace("{{message}}", body);
+            templatebody = templatebody.Replace("{{link}}", link);
+            templatebody = templatebody.Replace("{{linkDescription}}", linkDescripiton);
             var mailparameter = _mailParameterService.Get(3);
             SendMailDto sendMailDto = new SendMailDto()
             {
                 mailParameter = mailparameter.Data,
                 Email = user.Email,
-                Subject = "Kullanıcı Onay Maili",
-                Body = "Kullanıcı sisteme Kayıt oldu. Kaydı Tamamlamak için aşşagıdaki linke tıklaynız :)",
-                
+                Subject = "Kullanıcı Kayıt Onay Maili",
+                Body = templatebody,
+
             };
             _mailService.SendMail(sendMailDto);
-
-            return new SuccessDataResult<UserCompanyDto>(userCompanyDto, Messages.UserRegsiter);
         }
 
         public IDataResult<User> RegisterSecondAccount(UserForRegister userForRegister, string password)
@@ -130,6 +158,12 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, Messages.UserRegsiter);
         }
 
+        public IResult Update(User user)
+        {
+            _userService.Update(user);
+            return new SuccessResult(Messages.UserMailConfirmSuccessful);
+        }
+
         public IResult UserExist(string email)
         {
             if (_userService.GetByMail(email) != null)
@@ -137,6 +171,12 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.UserAlready);
             }
             return new SuccessResult();
+        }
+
+        IResult IAuthService.SendConfirmEmail(User user)
+        {
+            SendConfirmEmail(user);
+            return new SuccessResult(Messages.MailConfirmSendSuccessful);
         }
     }
 }

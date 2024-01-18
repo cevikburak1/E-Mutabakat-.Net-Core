@@ -23,14 +23,29 @@ namespace Business.Concrete
            _userDal.Add(user);
         }
 
+        public User GetById(int id)
+        {
+            return _userDal.Get(u => u.Id == id);
+        }
+
         public User GetByMail(string email)
         {
             return _userDal.Get(p => p.Email == email);
         }
 
+        public User GetByMailConfirmValue(string value)
+        {
+            return _userDal.Get(x => x.MailConfirmValue == value);
+        }
+
         public List<OperationClaim> GetClaims(User user,int companyid)
         {
             return _userDal.GetClaims(user,companyid);
+        }
+
+        public void Update(User user)
+        {
+           _userDal.Update(user);
         }
     }
 }

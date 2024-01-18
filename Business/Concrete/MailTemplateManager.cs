@@ -41,7 +41,12 @@ namespace Business.Concrete
 
         public IDataResult<List<MailTemplate>> GetAll(int companyId)
         {
-            return new SuccessDataResult<List<MailTemplate>>(_mailTemplateDal.GetList(m=>m.CompanyId==companyId));
+            return new SuccessDataResult<List<MailTemplate>>(_mailTemplateDal.GetList(m => m.CompanyId == companyId));
+        }
+
+        public IDataResult<MailTemplate> GetByTemplateName(string name, int companyId)
+        {
+            return new SuccessDataResult<MailTemplate>(_mailTemplateDal.Get(m => m.CompanyId == companyId && m.Type==name));
         }
 
         public IResult Update(MailTemplate mailTemplate)

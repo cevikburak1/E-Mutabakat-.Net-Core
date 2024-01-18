@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Business.Abstract
         IResult Update(MailTemplate mailTemplate);
         IResult Delete(MailTemplate mailTemplate);
         IDataResult<MailTemplate> Get(int id);
+        IDataResult<MailTemplate> GetByTemplateName(string name,int companyId);
         IDataResult<List<MailTemplate>> GetAll(int companyId);
     }
 }
