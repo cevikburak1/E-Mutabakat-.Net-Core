@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constans;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Hashing;
 using Core.Utilities.Results.Abstract;
@@ -7,6 +9,7 @@ using Core.Utilities.Results.Concrete;
 using Core.Utilities.Security.JWT;
 using Entities.Concrete;
 using Entities.Dtos;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +79,7 @@ namespace Business.Concrete
 
         public IDataResult<UserCompanyDto> Register(UserForRegister userForRegister, string password,Company company)
         {
+      
             byte[] passwordHash, passweordSalt;
             HashingHelper.CreatePasswordHash(password,out passwordHash, out passweordSalt);
             var user = new User()
@@ -90,7 +94,12 @@ namespace Business.Concrete
                 PasswordSalt = passweordSalt,
                 Name = userForRegister.Name,
             };
+          
             _userService.Add(user);
+            //Validasyon İşlemleri 
+            ValidationTool.Validate(new UserValidator(), user);
+            ValidationTool.Validate(new CompanyValidation(), company);
+
             _companyService.Add(company);
             //bu benim ilişkimi tanımlıyor 
             _companyService.UserCompanyAdd(user.Id, company.Id);
