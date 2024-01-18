@@ -1,30 +1,26 @@
-
-# E-Mutabakat Sitesi Projesi
+# E-Mutabakat Sitesi Projesi - Backend
 
 ## Proje Hakkında
-Bu repo, finansal mutabakat süreçlerini dijitalleştiren ve otomatize eden bir E-Mutabakat platformunun kaynak kodlarını içerir. ASP.NET 6.0 Web API ve Angular 13 kullanılarak geliştirilmiş bu sistem, finansal işlemleri basitleştiren ve süreçleri hızlandıran kullanıcı dostu bir arayüz sunar.
+Bu repo, E-Mutabakat platformunun backend kodlarını içerir. Finansal mutabakat süreçlerini dijitalleştiren bu sistem, ASP.NET 6.0 Web API ve Angular 13 kullanılarak inşa edilmiştir. Front-end kodları da dahil olmak üzere projenin tamamı, GitHub repolarımda bulunabilir.
 
 ## Teknolojiler ve Araçlar
-- **ASP.NET 6.0 Web API:** RESTful API tasarımı, veri yönetimi ve backend servislerin oluşturulması.
-- **Angular 13:** Kullanıcı etkileşimini en üst düzeye çıkaran dinamik frontend geliştirme.
-- **Entity Framework Core:** Veritabanı işlemleri için güçlü bir ORM aracı.
-- **Swagger/OpenAPI:** API dokümantasyonu ve test süreçlerini kolaylaştıran araçlar.
-- **JWT (JSON Web Tokens):** Güvenli kullanıcı kimlik doğrulama ve yetkilendirme mekanizmaları.
-- **AutoMapper:** Nesne eşleştirme işlemleri için etkin bir araç.
-- **Serilog:** Gelişmiş loglama yetenekleri ile sistem hatalarının takibi.
-- **Angular Material:** Kullanıcı arayüzünü zenginleştiren estetik ve responsive UI bileşenleri.
+- **ASP.NET 6.0 Web API:** RESTful API tasarımı, veri yönetimi ve backend servislerin oluşturulması için.
+- **Entity Framework Core:** Güçlü bir ORM aracı olarak veritabanı işlemleri.
+- **Swagger/OpenAPI:** Açık ve kolay anlaşılır API dokümantasyonu için.
+- **JWT (JSON Web Tokens):** Kullanıcı kimlik doğrulama ve yetkilendirme.
+- **AutoMapper:** Objeler arası eşleştirme işlemleri.
+- **Serilog:** Gelişmiş loglama yetenekleri.
+- **Angular Material:** Estetik ve responsive kullanıcı arayüzü bileşenleri.
 
 ## Ekstra Özellikler ve Geliştirmeler
-- **Email Gönderimi:** Kullanıcılar ve sistem arasındaki iletişimi güçlendiren email gönderim özellikleri.
-- **Fluent Validation:** Kullanıcı girdilerinin doğrulama ve iş kurallarının uygulanması.
-- **AOP Caching:** Uygulamanın performansını artırmak için kullanılan caching mekanizmaları.
-- **AutoFac:** Uygulamanın modüler ve test edilebilir olmasını sağlayan bağımlılık enjeksiyon kütüphanesi.
+- **Email Gönderimi:** Otomatik email bildirimleri.
+- **Fluent Validation:** Giriş verilerinin doğrulanması.
+- **AOP Caching:** Uygulama performansını artırmak için caching.
+- **AutoFac:** Bağımlılık enjeksiyonu ve tersine kontrol süreçleri.
 
 ## Geliştirme Yaklaşımım
-- **Modüler ve Sürdürülebilir Kod Yapısı:** Her bir modül, bağımsız ve sürdürülebilir şekilde tasarlandı.
-- **Yüksek Performans ve Güvenlik:** Uygulamanın performansını ve güvenliğini sürekli olarak göz önünde bulundurarak geliştirmeler yapıldı.
-- **Kullanıcı Odaklı Test Yaklaşımı:** Kullanıcı deneyimini en üst düzeye çıkarmayı hedefleyen test süreçleri.
-- **Sürekli Entegrasyon ve Dağıtım:** Yeni özelliklerin ve düzeltmelerin hızlı ve sorunsuz bir şekilde yayınlanması.
+Projede, temiz ve sürdürülebilir bir kod yapısını hedef alarak, yüksek performans ve güvenliği sağlayan bir geliştirme metodolojisi izledim. Kullanıcı odaklı bir test yaklaşımıyla, sürekli entegrasyon ve dağıtım süreçlerini benimsedim.
 
-
+## Frontend Kodları
+Bu projenin frontend kodları, Angular ile geliştirilmiş ve ayrı bir repoda barındırılmaktadır. Frontend kodlarına ve ek bilgilere Repolarımdan ulaşabilirsiniz.
 
