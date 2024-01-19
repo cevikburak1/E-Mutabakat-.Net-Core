@@ -97,8 +97,8 @@ namespace Business.Concrete
           
             _userService.Add(user);
             //Validasyon İşlemleri 
-            ValidationTool.Validate(new UserValidator(), user);
-            ValidationTool.Validate(new CompanyValidation(), company);
+            //ValidationTool.Validate(new UserValidator(), user);
+            //ValidationTool.Validate(new CompanyValidation(), company);
 
             _companyService.Add(company);
             //bu benim ilişkimi tanımlıyor 
