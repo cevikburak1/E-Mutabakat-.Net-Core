@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Transaction;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Hashing;
@@ -77,6 +78,7 @@ namespace Business.Concrete
             return new  SuccessDataResult<User>(usertoCheck, Messages.SuccessfulLogin);
         }
 
+        [TransactionScopeAspect]
         public IDataResult<UserCompanyDto> Register(UserForRegister userForRegister, string password,Company company)
         {
       
