@@ -1,10 +1,13 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.API.Controllers
 {
-    public class CompanyController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
 
@@ -24,10 +27,33 @@ namespace Web.API.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpPost("addcompany")]
-        public IActionResult AddCompany(Company company)
+        [HttpGet("getcompany")]
+        public IActionResult GetById(int id)
         {
-            var result = _companyService.Add(company);
+            var result = _companyService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+        [HttpPost("updateCompany")]
+        public IActionResult UpdateCompanyAndUserCompany(Company company)
+        {
+            var result = _companyService.Update(company);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
+
+
+        [HttpPost("addCompanyAndUserCompany")]
+        public IActionResult AddCompanyAndUserCompany(CompanyDto company)
+        {
+            var result = _companyService.AddCompanyAddUserCompany(company);
             if (result.Success)
             {
                 return Ok(result);
