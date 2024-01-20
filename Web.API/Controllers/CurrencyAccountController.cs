@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Concrete;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,5 +73,29 @@ namespace Web.API.Controllers
             }
             return BadRequest(result.Message);
         }
+
+        [HttpPost("addFromExcel")]
+        public IActionResult AddFromExcel(IFormFile file,int companyId)
+        {
+            if (file.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + ".xlsx";
+                var filePath = $"{Directory.GetCurrentDirectory()}/Content/{fileName}";
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(stream);
+                    stream.Flush();
+                }
+
+                var result = _currencyAccountService.AddToExcel(filePath,companyId);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result.Message);
+            }
+            return BadRequest("Dosya seçimi yapmadınız");
+        }
     }
+
 }

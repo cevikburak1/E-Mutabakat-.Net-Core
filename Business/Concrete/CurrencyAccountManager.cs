@@ -1,11 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,6 +30,51 @@ namespace Business.Concrete
         public IResult Add(CurrencyAccount currencyAccount)
         {
             _currencyAccountDal.Add(currencyAccount);
+            return new SuccessResult(Messages.AddedCurrencyAccount);
+        }
+        [ValidationAspect(typeof(CurrencyAccountValidation))]
+        [TransactionScopeAspect]
+        public IResult AddToExcel(string filePath,int companyId)
+        {
+            //program hata vermesin diye
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read))
+            {
+                using(var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+                    while (reader.Read())
+                    {
+                        //EXCELİN EN BAIASNDAKİ BAŞLIKLARI ALMAMASI İÇİN 
+                        string code = reader.GetString(0);
+                        string name = reader.GetString(1);
+                        string address = reader.GetString(2);
+                        string taxDeparment = reader.GetString(3);
+                        string taxIdNumber = reader.GetString(4);
+                        string identityNumber = reader.GetString(5);
+                        string email = reader.GetString(6);
+                        string authorized = reader.GetString(7);
+
+                        if(code !="Cari Kodu")
+                        {
+                            CurrencyAccount currencyAccount = new CurrencyAccount
+                            {
+                                Name = name,
+                                Address = address,
+                                Code = code,
+                                TaxDepartment = taxDeparment,  
+                                TaxIdNumber= taxIdNumber,
+                                IdentityNumber= identityNumber,
+                                Email = email,
+                                Authorized= authorized,
+                                AddedAt=DateTime.Now,
+                                CompanyId = companyId,
+                                IsActive=true
+                            };
+                            _currencyAccountDal.Add(currencyAccount);
+                        }
+                    }
+                }
+            }
             return new SuccessResult(Messages.AddedCurrencyAccount);
         }
 
