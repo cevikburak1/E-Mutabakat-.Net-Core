@@ -25,6 +25,10 @@ namespace Business.Constans
         public static string MailAlreadyConfirm = "Mail zaten Onaylı Tekrar Gönderim Yapılmadı";
         public static string MailConfirmExpressionNotDone = "Mail onayını 5 dakikada bir gönderebilirsiniz ";
         public static string UpdatedCompany = "Şirket Kaydı Başarı ile güncellendi";
+
+        public static string AddedCurrencyAccount = "Cari Başarı İle Eklendi";
+        public static string UpdatedCurrencyAccount = "Cari Başarı İle Güncellendi";
+        public static string DeletedCurrencyAccount = "Cari Başarı İle Silindi";
     }
 
     
