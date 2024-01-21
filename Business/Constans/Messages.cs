@@ -29,8 +29,15 @@ namespace Business.Constans
         public static string AddedCurrencyAccount = "Cari Başarı İle Eklendi";
         public static string UpdatedCurrencyAccount = "Cari Başarı İle Güncellendi";
         public static string DeletedCurrencyAccount = "Cari Başarı İle Silindi";
+
+
+        public static string AddedAccountReconciliations = "Cari Mutabakat İle Eklendi";
+        public static string UpdatedAccountReconciliations = "Cari Mutabakat Başarı İle Güncellendi";
+        public static string DeletedAccountReconciliations = "Cari Mutabakat Başarı İle Silindi";
     }
 
+
     
+
 }
 
