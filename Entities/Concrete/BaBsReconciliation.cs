@@ -13,7 +13,7 @@ namespace Entities.Concrete
         public int CompanyId { get; set; }
         public int CurrencyAccountId { get; set; }
         public string? Type { get; set; }
-        public int Month { get; set; }
+        public int Mounth { get; set; }
         public int Year { get; set; }
         public int Quantity { get; set; }
         public decimal Total { get; set; }
