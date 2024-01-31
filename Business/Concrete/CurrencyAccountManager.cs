@@ -89,6 +89,11 @@ namespace Business.Concrete
             return new SuccessDataResult<CurrencyAccount>(_currencyAccountDal.Get(x => x.Id == id));
         }
 
+        public IDataResult<CurrencyAccount> GetByCode(string code, int companyId)
+        {
+            return new SuccessDataResult<CurrencyAccount>(_currencyAccountDal.Get(p => p.Code == code && p.CompanyId == companyId));
+        }
+
         public IDataResult<List<CurrencyAccount>> GetList(int companyId)
         {
             return new SuccessDataResult<List<CurrencyAccount>>(_currencyAccountDal.GetList(x => x.CompanyId == companyId));

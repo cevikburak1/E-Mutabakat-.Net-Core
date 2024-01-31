@@ -7,18 +7,19 @@ namespace Web.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountReconciliationsController : ControllerBase
+    public class AccountReconciliationDetailController : ControllerBase
     {
-        private readonly IAccountReconciliationsService _accountReconciliationsService;
+        private readonly IAccountReconciliationDetailService _accountReconciliationDetailService;
 
-        public AccountReconciliationsController(IAccountReconciliationsService accountReconciliationsService)
+        public AccountReconciliationDetailController(IAccountReconciliationDetailService accountReconciliationDetailService)
         {
-            _accountReconciliationsService = accountReconciliationsService;
+            _accountReconciliationDetailService= accountReconciliationDetailService;
         }
+
         [HttpPost("add")]
-        public IActionResult Add(AccountReconciliations accountReconciliations)
+        public IActionResult Add(AccountReconciliationDetail accountReconciliationDetail)
         {
-            var result = _accountReconciliationsService.Add(accountReconciliations);
+            var result = _accountReconciliationDetailService.Add(accountReconciliationDetail);
             if (result.Success)
             {
                 return Ok(result);
@@ -27,9 +28,9 @@ namespace Web.API.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(AccountReconciliations accountReconciliations)
+        public IActionResult Update(AccountReconciliationDetail accountReconciliationDetail)
         {
-            var result = _accountReconciliationsService.Update(accountReconciliations);
+            var result = _accountReconciliationDetailService.Update(accountReconciliationDetail);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,9 +40,9 @@ namespace Web.API.Controllers
 
 
         [HttpPost("delete")]
-        public IActionResult Delete(AccountReconciliations accountReconciliations)
+        public IActionResult Delete(AccountReconciliationDetail accountReconciliationDetail)
         {
-            var result = _accountReconciliationsService.Delete(accountReconciliations);
+            var result = _accountReconciliationDetailService.Delete(accountReconciliationDetail);
             if (result.Success)
             {
                 return Ok(result);
@@ -52,7 +53,7 @@ namespace Web.API.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _accountReconciliationsService.GetById(id);
+            var result = _accountReconciliationDetailService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -61,9 +62,9 @@ namespace Web.API.Controllers
         }
 
         [HttpGet("getList")]
-        public IActionResult GetList(int companyId)
+        public IActionResult GetList(int accountReconciliationId)
         {
-            var result = _accountReconciliationsService.GetList(companyId);
+            var result = _accountReconciliationDetailService.GetList(accountReconciliationId);
             if (result.Success)
             {
                 return Ok(result);
@@ -72,7 +73,7 @@ namespace Web.API.Controllers
         }
 
         [HttpPost("addFromExcel")]
-        public IActionResult AddFromExcel(IFormFile file, int companyId)
+        public IActionResult AddFromExcel(IFormFile file, int accountReconciliationId)
         {
             if (file.Length > 0)
             {
@@ -84,7 +85,7 @@ namespace Web.API.Controllers
                     stream.Flush();
                 }
 
-                var result = _accountReconciliationsService.AddToExcel(filePath, companyId);
+                var result = _accountReconciliationDetailService.AddToExcel(filePath, accountReconciliationId);
                 if (result.Success)
                 {
                     return Ok(result);
@@ -93,6 +94,5 @@ namespace Web.API.Controllers
             }
             return BadRequest("Dosya seçimi yapmadınız");
         }
-
     }
 }

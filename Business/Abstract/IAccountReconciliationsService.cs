@@ -12,7 +12,7 @@ namespace Business.Abstract
     {
         IResult Add(AccountReconciliations accountReconciliations);
 
-        //IResult AddToExcel(string fileName, int companyId);
+        IResult AddToExcel(string filePath, int companyId);
         IResult Update(AccountReconciliations accountReconciliations);
         IResult Delete(AccountReconciliations accountReconciliations);
         IDataResult<AccountReconciliations> GetById(int id);

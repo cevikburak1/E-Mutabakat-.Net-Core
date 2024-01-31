@@ -1,6 +1,11 @@
 ﻿using Business.Abstract;
+using Business.Constans;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +21,75 @@ namespace Business.Concrete
         public AccountReconciliationDetailManager(IAccountReconciliationDetailDal accountReconciliationDetailDal)
         {
             _accountReconciliationDetailDal = accountReconciliationDetailDal;
+        }
+
+        public IResult Add(AccountReconciliationDetail accountReconciliationDetail)
+        {
+            _accountReconciliationDetailDal.Add(accountReconciliationDetail);
+            return new SuccessResult(Messages.AddedAccountReconciliationsDetail);
+        }
+
+        public IResult AddToExcel(string filePath, int accountReconciliationId)
+        {
+            //program hata vermesin diye
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read))
+            {
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+                    while (reader.Read())
+                    {
+                        //EXCELİN EN BAIASNDAKİ BAŞLIKLARI ALMAMASI İÇİN 
+                        string description = reader.GetString(1);
+
+
+
+                        if (description != "Açıklama" && description != null)
+                        {
+
+
+                            DateTime date = reader.GetDateTime(0);
+                            double currencyId = reader.GetDouble(2);
+                            double debit = reader.GetDouble(3);
+                            double credit = reader.GetDouble(4);
+
+                            AccountReconciliationDetail accountReconciliationDetail = new AccountReconciliationDetail()
+                            {
+                                Date = date,
+                                CurrencyId = Convert.ToInt16(currencyId),
+                                CurrencyDebit= Convert.ToDecimal(debit),
+                                CurrencyCredit= Convert.ToDecimal(credit),
+                                AccountReconciliationId = accountReconciliationId,
+                                Description = description
+                            };
+                            _accountReconciliationDetailDal.Add(accountReconciliationDetail);
+                        }
+                    }
+                }
+            }
+            return new SuccessResult(Messages.AddedAccountReconciliationsDetail);
+        }
+
+        public IResult Delete(AccountReconciliationDetail accountReconciliationDetail)
+        {
+            _accountReconciliationDetailDal.Delete(accountReconciliationDetail);
+            return new SuccessResult(Messages.DeletedAccountReconciliationsDetail);
+        }
+
+        public IDataResult<AccountReconciliationDetail> GetById(int id)
+        {
+            return new SuccessDataResult<AccountReconciliationDetail>(_accountReconciliationDetailDal.Get(x=>x.Id==id));
+        }
+
+        public IDataResult<List<AccountReconciliationDetail>> GetList(int accountReconciliationId)
+        {
+            return new SuccessDataResult<List<AccountReconciliationDetail>>(_accountReconciliationDetailDal.GetList(x => x.AccountReconciliationId == accountReconciliationId));
+        }
+
+        public IResult Update(AccountReconciliationDetail accountReconciliationDetail)
+        {
+            _accountReconciliationDetailDal.Update(accountReconciliationDetail);
+            return new SuccessResult(Messages.UpdatedAccountReconciliationsDetail);
         }
     }
 }

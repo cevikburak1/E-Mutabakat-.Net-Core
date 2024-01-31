@@ -17,7 +17,7 @@ namespace Business.Abstract
         IResult Update(CurrencyAccount currencyAccount);
         IResult Delete(CurrencyAccount currencyAccount);
         IDataResult<CurrencyAccount> Get(int id);
-
+        IDataResult<CurrencyAccount> GetByCode(string code,int companyId);
         //Şirkete Göre  Cari listesi gelicek
         IDataResult<List<CurrencyAccount>> GetList(int companyId);
     }
