@@ -1,6 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.AutoFac;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IOC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,6 +33,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
 
     };
+});
+builder.Services.AddDependecyResolvers(new ICoreModule[]
+{
+    new CoreModule(),
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
