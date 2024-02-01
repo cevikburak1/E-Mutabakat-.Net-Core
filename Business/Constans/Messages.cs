@@ -39,6 +39,11 @@ namespace Business.Constans
         public static string UpdatedBaBsReconciliation = "Babs Başarı İle Güncellendi";
         public static string DeletedBaBsReconciliation = "Babs Başarı İle Silindi";
 
+
+        public static string AddedBaBsReconciliationDetail = "Babs Detay Başarı İle Eklendi";
+        public static string UpdatedBaBsReconciliationDetail = "Babs Detay Başarı İle Güncellendi";
+        public static string DeletedBaBsReconciliationDetail = "Babs Detay Başarı İle Silindi";
+
         public static string AddedAccountReconciliationsDetail = "Cari Mutabakat Detay Başarı İle Eklendi";
         public static string UpdatedAccountReconciliationsDetail = "Cari Mutabakat Detay Başarı İle Güncellendi";
         public static string DeletedAccountReconciliationsDetail = "Cari Mutabakat Detay Başarı İle Silindi";
