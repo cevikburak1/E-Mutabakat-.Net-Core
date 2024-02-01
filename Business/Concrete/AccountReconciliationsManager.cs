@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constans;
 using Core.Aspects.Autofac.Transaction;
+using Core.Aspects.Caching;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -89,6 +90,7 @@ namespace Business.Concrete
             return new SuccessDataResult<AccountReconciliations>(_accountReconciliationsDal.Get(x => x.Id == id));
         }
 
+        [CacheAspect(60)]
         public IDataResult<List<AccountReconciliations>> GetList(int companyId)
         {
             return new SuccessDataResult<List<AccountReconciliations>>(_accountReconciliationsDal.GetList(x => x.CompanyId == companyId));
