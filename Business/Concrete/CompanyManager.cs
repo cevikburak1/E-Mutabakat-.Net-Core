@@ -1,8 +1,9 @@
-﻿using Business.Abstract;
+﻿ using Business.Abstract;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Caching;
 using Core.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -31,6 +32,7 @@ namespace Business.Concrete
             _companyDal = companyDal;
         }
         [ValidationAspect(typeof(CompanyValidation))]
+        [RemoveCacheAspect("ICompanyService.Get")]
         public IResult Add(Company company)
         {
             _companyDal.Add(company);
@@ -39,6 +41,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CompanyValidation))]
         [TransactionScopeAspect]
+        [RemoveCacheAspect("ICompanyService.Get")]
         public IResult AddCompanyAddUserCompany(CompanyDto company)
         {
             _companyDal.Add(company.Company);
@@ -56,28 +59,33 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [CacheAspect(60)]
         public IDataResult<Company> GetById(int id)
         {
             return new SuccessDataResult<Company>(_companyDal.Get(x => x.Id == id));
         }
 
+        [CacheAspect(60)]
         public IDataResult<UserCompany> GetCompany(int userid)
         {
            return new SuccessDataResult<UserCompany>(_companyDal.GetCompany(userid));
         }
 
+        [CacheAspect(60)]
         public IDataResult<List<Company>> GetList()
         {
             return new SuccessDataResult<List<Company>>(_companyDal.GetList(),"İşlem Başarılı");
         }
 
         [ValidationAspect(typeof(CompanyValidation))]
+        [RemoveCacheAspect("ICompanyService.Get")]
         public IResult Update(Company company)
         {
             _companyDal.Update(company);
             return new SuccessResult(Messages.UpdatedCompany);
         }
 
+        [RemoveCacheAspect("ICompanyService.Get")]
         public IResult UserCompanyAdd(int userId, int companyId)
         {
             //var result kullanamam çünkü sonuç döndermedim ben

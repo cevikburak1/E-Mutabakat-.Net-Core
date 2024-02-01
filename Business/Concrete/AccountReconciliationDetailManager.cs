@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constans;
+using Core.Aspects.Caching;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -23,12 +24,14 @@ namespace Business.Concrete
             _accountReconciliationDetailDal = accountReconciliationDetailDal;
         }
 
+        [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult Add(AccountReconciliationDetail accountReconciliationDetail)
         {
             _accountReconciliationDetailDal.Add(accountReconciliationDetail);
             return new SuccessResult(Messages.AddedAccountReconciliationsDetail);
         }
 
+        [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult AddToExcel(string filePath, int accountReconciliationId)
         {
             //program hata vermesin diye
@@ -71,22 +74,26 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedAccountReconciliationsDetail);
         }
 
+        [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult Delete(AccountReconciliationDetail accountReconciliationDetail)
         {
             _accountReconciliationDetailDal.Delete(accountReconciliationDetail);
             return new SuccessResult(Messages.DeletedAccountReconciliationsDetail);
         }
 
+        [CacheAspect(60)]
         public IDataResult<AccountReconciliationDetail> GetById(int id)
         {
             return new SuccessDataResult<AccountReconciliationDetail>(_accountReconciliationDetailDal.Get(x=>x.Id==id));
         }
 
+        [CacheAspect(60)]
         public IDataResult<List<AccountReconciliationDetail>> GetList(int accountReconciliationId)
         {
             return new SuccessDataResult<List<AccountReconciliationDetail>>(_accountReconciliationDetailDal.GetList(x => x.AccountReconciliationId == accountReconciliationId));
         }
 
+        [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult Update(AccountReconciliationDetail accountReconciliationDetail)
         {
             _accountReconciliationDetailDal.Update(accountReconciliationDetail);

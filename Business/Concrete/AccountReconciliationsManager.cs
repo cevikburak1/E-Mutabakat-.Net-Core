@@ -88,6 +88,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedAccountReconciliations);
         }
 
+        [CacheAspect(60)]
         public IDataResult<AccountReconciliations> GetById(int id)
         {
             return new SuccessDataResult<AccountReconciliations>(_accountReconciliationsDal.Get(x => x.Id == id));

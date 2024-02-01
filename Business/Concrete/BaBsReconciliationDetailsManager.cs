@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constans;
 using Core.Aspects.Autofac.Transaction;
+using Core.Aspects.Caching;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -24,12 +25,15 @@ namespace Business.Concrete
             _baBsReconciliationDetailsDal = baBsReconciliationDetailsDal;
         }
 
+
+        [RemoveCacheAspect("IBaBsReconciliationDetailsService.Get")]
         public IResult Add(BaBsReconciliationDetails baBsReconciliationDetails)
         {
             _baBsReconciliationDetailsDal.Add(baBsReconciliationDetails);
             return new SuccessResult(Messages.AddedBaBsReconciliationDetail);
         }
 
+        [RemoveCacheAspect("IBaBsReconciliationDetailsService.Get")]
         [TransactionScopeAspect]
         public IResult AddToExcel(string filePath, int baBsReconciliationId)
         {
@@ -70,22 +74,26 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedBaBsReconciliationDetail);
         }
 
+        [RemoveCacheAspect("IBaBsReconciliationDetailsService.Get")]
         public IResult Delete(BaBsReconciliationDetails baBsReconciliationDetails)
         {
             _baBsReconciliationDetailsDal.Delete(baBsReconciliationDetails);
             return new SuccessResult(Messages.DeletedBaBsReconciliationDetail);
         }
 
+        [CacheAspect(60)]
         public IDataResult<BaBsReconciliationDetails> GetById(int id)
         {
             return new SuccessDataResult<BaBsReconciliationDetails>(_baBsReconciliationDetailsDal.Get(x => x.Id == id));
         }
 
+        [CacheAspect(60)]
         public IDataResult<List<BaBsReconciliationDetails>> GetList(int baBsReconciliationId)
         {
             return new SuccessDataResult<List<BaBsReconciliationDetails>>(_baBsReconciliationDetailsDal.GetList(x => x.BaBsReconciliationId == baBsReconciliationId));
         }
 
+        [RemoveCacheAspect("IBaBsReconciliationDetailsService.Get")]
         public IResult Update(BaBsReconciliationDetails baBsReconciliationDetails)
         {
             _baBsReconciliationDetailsDal.Update(baBsReconciliationDetails);
