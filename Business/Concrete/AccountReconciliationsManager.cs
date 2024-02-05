@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Attributes;
+using Business.BusinessAspects;
 using Business.Constans;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Caching;
@@ -11,6 +13,7 @@ using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +30,8 @@ namespace Business.Concrete
             _currencyAccountService = currencyAccountService;
         }
 
+        [SecuredOperation("AccountReconciliations.Add")]
+        //[RoleAttirbute("AccountReconciliations.Add")]
         [RemoveCacheAspect("IAccountReconciliationsService.Get")]
         public IResult Add(AccountReconciliations accountReconciliations)
         {

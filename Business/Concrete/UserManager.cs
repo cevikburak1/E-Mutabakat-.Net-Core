@@ -49,7 +49,6 @@ namespace Business.Concrete
         }
 
 
-        [CacheAspect(60)]
         public List<OperationClaim> GetClaims(User user,int companyid)
         {
             return _userDal.GetClaims(user,companyid);

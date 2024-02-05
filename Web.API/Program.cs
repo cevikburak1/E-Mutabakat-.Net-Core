@@ -28,7 +28,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = true,
         ValidateLifetime = false,
         ValidIssuer = tokenOptions.Issuer,
-        ValidAudience = tokenOptions.Audince,
+        ValidAudience = tokenOptions.Audience,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
 
@@ -51,6 +51,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors(builder=>builder.WithOrigins("https://localhost:7030").AllowAnyHeader());
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
