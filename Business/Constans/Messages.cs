@@ -47,6 +47,17 @@ namespace Business.Constans
         public static string AddedAccountReconciliationsDetail = "Cari Mutabakat Detay Başarı İle Eklendi";
         public static string UpdatedAccountReconciliationsDetail = "Cari Mutabakat Detay Başarı İle Güncellendi";
         public static string DeletedAccountReconciliationsDetail = "Cari Mutabakat Detay Başarı İle Silindi";
+
+
+
+
+        public static string AddedOperationClaim = "Kullanıcı Yetkileri Başarı İle Eklendi";
+        public static string UpdatedOperationClaim = "Kullanıcı Yetkileri Başarı İle Güncellendi";
+        public static string DeletedOperationClaim = "Kullanıcı Yetkileri Başarı İle Silindi";
+
+        public static string AddedUserOperationClaim = "Kullanıcı Yetkilendirme Başarı İle Eklendi";
+        public static string UpdatedUserOperationClaim = "Kullanıcı Yetkilendirme Başarı İle Güncellendi";
+        public static string DeletedUserOperationClaim = "Kullanıcı Yetkilendirme Başarı İle Silindi";
     }
 
 
