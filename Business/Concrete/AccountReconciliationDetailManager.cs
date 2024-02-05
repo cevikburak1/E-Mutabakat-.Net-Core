@@ -1,6 +1,10 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constans;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Aspects.Caching;
+using Core.Aspects.Performance;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -10,6 +14,7 @@ using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +29,8 @@ namespace Business.Concrete
             _accountReconciliationDetailDal = accountReconciliationDetailDal;
         }
 
+        [PerformanceAspect(1)]
+        [SecuredOperation("AccountReconciliationDetail.Add,Admin")]
         [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult Add(AccountReconciliationDetail accountReconciliationDetail)
         {
@@ -31,6 +38,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedAccountReconciliationsDetail);
         }
 
+        [PerformanceAspect(1)]
+        [SecuredOperation("AccountReconciliationDetail.Add,Admin")]
         [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult AddToExcel(string filePath, int accountReconciliationId)
         {
@@ -74,6 +83,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedAccountReconciliationsDetail);
         }
 
+        [PerformanceAspect(1)]
+        [SecuredOperation("AccountReconciliationDetail.Delete,Admin")]
         [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult Delete(AccountReconciliationDetail accountReconciliationDetail)
         {
@@ -81,18 +92,24 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedAccountReconciliationsDetail);
         }
 
+        [PerformanceAspect(1)]
+        [SecuredOperation("AccountReconciliationDetail.Get,Admin")]
         [CacheAspect(60)]
         public IDataResult<AccountReconciliationDetail> GetById(int id)
         {
             return new SuccessDataResult<AccountReconciliationDetail>(_accountReconciliationDetailDal.Get(x=>x.Id==id));
         }
 
+        [PerformanceAspect(1)]
+        [SecuredOperation("AccountReconciliationDetail.GetList,Admin")]
         [CacheAspect(60)]
         public IDataResult<List<AccountReconciliationDetail>> GetList(int accountReconciliationId)
         {
             return new SuccessDataResult<List<AccountReconciliationDetail>>(_accountReconciliationDetailDal.GetList(x => x.AccountReconciliationId == accountReconciliationId));
         }
 
+        [PerformanceAspect(1)]
+        [SecuredOperation("AccountReconciliationDetail.Update,Admin")]
         [RemoveCacheAspect("IAccountReconciliationDetailService.Get")]
         public IResult Update(AccountReconciliationDetail accountReconciliationDetail)
         {
