@@ -4,6 +4,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Aspects.Caching;
+using Core.Aspects.Performance;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -27,6 +28,7 @@ namespace Business.Concrete
             _currencyAccountDal = currencyAccountDal;
         }
 
+        [PerformanceAspect(1)]
         [ValidationAspect(typeof(CurrencyAccountValidation))]
         [RemoveCacheAspect("ICurrencyAccountService.Get")]
         public IResult Add(CurrencyAccount currencyAccount)
