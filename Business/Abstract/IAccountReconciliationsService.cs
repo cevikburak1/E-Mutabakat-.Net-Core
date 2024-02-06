@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,13 @@ namespace Business.Abstract
         IResult Delete(AccountReconciliations accountReconciliations);
         IDataResult<AccountReconciliations> GetById(int id);
 
+        IDataResult<AccountReconciliations> GetByCode(string code);
         //Şirkete Göre  Cari listesi gelicek
         IDataResult<List<AccountReconciliations>> GetList(int companyId);
+
+        IDataResult<List<AccountReconcilationDto>> GetListDto(int companyId);
+        IResult SendReconcilationMail(AccountReconcilationDto accountReconciliationsDto);
+
+
     }
 }

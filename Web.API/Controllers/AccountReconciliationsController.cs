@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -64,7 +65,7 @@ public class AccountReconciliationsController : ControllerBase
     [HttpGet("getList")]
     public IActionResult GetList(int companyId)
     {
-        var result = _accountReconciliationsService.GetList(companyId);
+        var result = _accountReconciliationsService.GetListDto(companyId);
         if (result.Success)
         {
             return Ok(result);
@@ -93,6 +94,30 @@ public class AccountReconciliationsController : ControllerBase
             return BadRequest(result.Message);
         }
         return BadRequest("Dosya seçimi yapmadınız");
+    }
+
+
+    //public IResult SendReconcilationMail(AccountReconcilationDto accountReconciliationsDto)
+    [HttpPost("SendReconcilationMail")]
+    public IActionResult SendReconcilationMail(AccountReconcilationDto accountReconciliationsDto)
+    {
+        var result = _accountReconciliationsService.SendReconcilationMail(accountReconciliationsDto);
+        if (result.Success)
+        {
+            return Ok(result);
+        }
+        return BadRequest(result.Message);
+    }
+
+    [HttpGet("getbyCode")]
+    public IActionResult GetByCode(string code)
+    {
+        var result = _accountReconciliationsService.GetByCode(code);
+        if (result.Success)
+        {
+            return Ok(result);
+        }
+        return BadRequest(result.Message);
     }
 
 }
