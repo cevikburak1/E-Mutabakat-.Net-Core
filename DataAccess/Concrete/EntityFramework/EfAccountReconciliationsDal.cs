@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (var context = new ContextDb())
             {
-                var result = from reconciliations in context.AccountReconciliations
+                var result = from reconciliations in context.AccountReconciliations.Where(x=>x.CompanyId==companyId)
                              join company in context.Companies on reconciliations.CompanyId equals company.Id
                              join account in context.CurrencyAccounts on reconciliations.CurrencyAccountId equals account.Id
                              join currency in context.Currencies on reconciliations.CurrencyId equals currency.Id
