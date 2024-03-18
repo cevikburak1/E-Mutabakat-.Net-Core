@@ -57,7 +57,7 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(1)]
-        [SecuredOperation("User.Update,Admin")]
+        //[SecuredOperation("User.Update,Admin")]
         [RemoveCacheAspect("IUserService.Get")]
         public void Update(User user)
         {

@@ -58,6 +58,10 @@ namespace Business.Constans
         public static string AddedUserOperationClaim = "Kullanıcı Yetkilendirme Başarı İle Eklendi";
         public static string UpdatedUserOperationClaim = "Kullanıcı Yetkilendirme Başarı İle Güncellendi";
         public static string DeletedUserOperationClaim = "Kullanıcı Yetkilendirme Başarı İle Silindi";
+
+        public static string UpdatedTermsAndConditionm = "Sözleşme Güncellendi";
+
+        
     }
 
 

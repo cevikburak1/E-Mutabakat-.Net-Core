@@ -55,7 +55,7 @@ namespace Business.Concrete
         {
             var claim = _userService.GetClaims(user, companId);
             var accessToken = _tokenHelper.CreateToken(user, claim, companId);
-            return new SuccessDataResult<AccessToken>(accessToken);
+            return new SuccessDataResult<AccessToken>(accessToken, Messages.SuccessfulLogin);
         }
 
         public IDataResult<User> GetById(int id)

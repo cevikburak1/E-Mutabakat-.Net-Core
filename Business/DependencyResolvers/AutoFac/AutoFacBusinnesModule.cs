@@ -64,6 +64,9 @@ namespace Business.DependencyResolvers.AutoFac
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
 
+            builder.RegisterType<TermsAndConditionManager>().As<ITermsAndConditionService>();
+            builder.RegisterType<EfTermsAndConditionDal>().As<ITermsAndConditionDal>();
+
             builder.RegisterType<AuthManager>().As<IAuthService>();
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();

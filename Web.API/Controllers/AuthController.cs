@@ -80,9 +80,9 @@ namespace Web.API.Controllers
                 var result = _authService.CreateAccessToken(logindata.Data, usercompany.CompanyId);
                 if (result.Success)
                 {
-                    return Ok(result.Data);
+                    return Ok(result);
                 }
-                return BadRequest(result.Message);     
+                return BadRequest(result);     
             }
             return BadRequest("Kullanıcı Pasif Durumda.Aktif Etmek için Yöneticiye Danışın");
 
